@@ -1,0 +1,70 @@
+
+1. List all invoice items, avoid duplicates.    
+mysql> select * from Invoice_item;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|   1007 |  106 |        3 |
+|   1011 |  106 |        2 |
+|   1009 |  105 |        3 |
+|   1003 |  104 |        1 |
+|   1011 |  102 |        5 |
+|   1009 |  105 |        3 |
+|   1011 |  102 |        5 |
++--------+------+----------+
+7 rows in set (0.00 sec)
+mysql> SELECT DISTINCT * FROM Invoice_item;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|   1007 |  106 |        3 |
+|   1011 |  106 |        2 |
+|   1009 |  105 |        3 |
+|   1003 |  104 |        1 |
+|   1011 |  102 |        5 |
++--------+------+----------+
+5 rows in set (0.02 sec)
+
+2. List the customer details who not live in ‘tvm’. 
+mysql> select * from customer;
++----+--------+---------------+-----------+------------+
+| id | name   | address       | city      | ph_no      |
++----+--------+---------------+-----------+------------+
+|  2 | nihad  | chalakkal     | TVM       | 9544760755 |
+|  6 | anjith | kunnamangalam | kozhikode | 9056789070 |
+|  7 | devika | poolavalli    | palakkad  | 9867403578 |
++----+--------+---------------+-----------+------------+
+3 rows in set (0.00 sec)
+mysql> SELECT * FROM customer WHERE city <> 'TVM';
++----+--------+---------------+-----------+------------+
+| id | name   | address       | city      | ph_no      |
++----+--------+---------------+-----------+------------+
+|  6 | anjith | kunnamangalam | kozhikode | 9056789070 |
+|  7 | devika | poolavalli    | palakkad  | 9867403578 |
++----+--------+---------------+-----------+------------+
+2 rows in set (0.00 sec)
+
+3. Display the customer details sorted in ascending by city and descending by names. 
+
+mysql> SELECT * FROM customer ORDER BY city ASC, name DESC;
++----+--------+---------------+-----------+------------+
+| id | name   | address       | city      | ph_no      |
++----+--------+---------------+-----------+------------+
+|  6 | anjith | kunnamangalam | kozhikode | 9056789070 |
+|  7 | devika | poolavalli    | palakkad  | 9867403578 |
+|  2 | nihad  | chalakkal     | TVM       | 9544760755 |
++----+--------+---------------+-----------+------------+
+3 rows in set (0.00 sec)
+
+4. Find the customer names who have ‘e’ or ‘a’ in them and at least 3 characters in length.
+
+mysql> select name from customer where(name like '%%' or name like '%e%')and name like '___%';
++--------+
+| name   |
++--------+
+| nihad  |
+| anjith |
+| devika |
++--------+
+3 rows in set (0.00 sec)
+
