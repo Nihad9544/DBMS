@@ -1,0 +1,208 @@
+
+3. TCL & DCL COMMANDS
+
+
+a) TCL COMMANDS 
+ 1. Commit 
+
+mysql> select * from employee;
++------+--------+------+--------------+-----------+
+| SSN  | name   | dob  | adhar        | city      |
++------+--------+------+--------------+-----------+
+|  101 | abin   | 2004 | 123456784526 | calicut   |
+|  102 | salman | 2000 | 123456728027 | kochi     |
+|  103 | amith  | 2003 | 564023785625 | TVM       |
+|  104 | sura   | 2003 | 459027891325 | kozhikode |
+|  105 | jobin  | 2002 | 256789354730 | palakkad  |
+|  106 | alen   | 2004 | 345689670549 | calicut   |
+|  107 | arjun  | 2003 | 449953671192 | kochi     |
++------+--------+------+--------------+-----------+
+7 rows in set (0.00 sec)
+
+mysql> set autocommit=0
+    -> ;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into employee values(108,'kannan',2000,234567890567,'TVM');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.10 sec)
+
+
+mysql> select*from employee;
++------+--------+------+--------------+-----------+
+| SSN  | name   | dob  | adhar        | city      |
++------+--------+------+--------------+-----------+
+|  101 | abin   | 2004 | 123456784526 | calicut   |
+|  102 | salman | 2000 | 123456728027 | kochi     |
+|  103 | amith  | 2003 | 564023785625 | TVM       |
+|  104 | sura   | 2003 | 459027891325 | kozhikode |
+|  105 | jobin  | 2002 | 256789354730 | palakkad  |
+|  106 | alen   | 2004 | 345689670549 | calicut   |
+|  107 | arjun  | 2003 | 449953671192 | kochi     |
+|  108 | kannan | 2000 | 234567890567 | TVM       |
++------+--------+------+--------------+-----------+
+
+2. Rollback 
+mysql> set autocommit=0
+    -> ;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select*from employee;
++------+--------+------+--------------+-----------+
+| SSN  | name   | dob  | adhar        | city      |
++------+--------+------+--------------+-----------+
+|  101 | abin   | 2004 | 123456784526 | calicut   |
+|  102 | salman | 2000 | 123456728027 | kochi     |
+|  103 | amith  | 2003 | 564023785625 | TVM       |
+|  104 | sura   | 2003 | 459027891325 | kozhikode |
+|  105 | jobin  | 2002 | 256789354730 | palakkad  |
+|  106 | alen   | 2004 | 345689670549 | calicut   |
+|  107 | arjun  | 2003 | 449953671192 | kochi     |
+|  108 | kannan | 2000 | 234567890567 | TVM       |
++------+--------+------+--------------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> insert into employee values(109,'suni',2002,234567894578,'TVM');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from employee;
++------+--------+------+--------------+-----------+
+| SSN  | name   | dob  | adhar        | city      |
++------+--------+------+--------------+-----------+
+|  101 | abin   | 2004 | 123456784526 | calicut   |
+|  102 | salman | 2000 | 123456728027 | kochi     |
+|  103 | amith  | 2003 | 564023785625 | TVM       |
+|  104 | sura   | 2003 | 459027891325 | kozhikode |
+|  105 | jobin  | 2002 | 256789354730 | palakkad  |
+|  106 | alen   | 2004 | 345689670549 | calicut   |
+|  107 | arjun  | 2003 | 449953671192 | kochi     |
+|  108 | kannan | 2000 | 234567890567 | TVM       |
+|  109 | suni   | 2002 | 234567894578 | TVM       |
++------+--------+------+--------------+-----------+
+9 rows in set (0.00 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> select*from employee;
++------+--------+------+--------------+-----------+
+| SSN  | name   | dob  | adhar        | city      |
++------+--------+------+--------------+-----------+
+|  101 | abin   | 2004 | 123456784526 | calicut   |
+|  102 | salman | 2000 | 123456728027 | kochi     |
+|  103 | amith  | 2003 | 564023785625 | TVM       |
+|  104 | sura   | 2003 | 459027891325 | kozhikode |
+|  105 | jobin  | 2002 | 256789354730 | palakkad  |
+|  106 | alen   | 2004 | 345689670549 | calicut   |
+|  107 | arjun  | 2003 | 449953671192 | kochi     |
+|  108 | kannan | 2000 | 234567890567 | TVM       |
++------+--------+------+--------------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select*from employee;
++------+--------+------+--------------+-----------+
+| SSN  | name   | dob  | adhar        | city      |
++------+--------+------+--------------+-----------+
+|  101 | abin   | 2004 | 123456784526 | calicut   |
+|  102 | salman | 2000 | 123456728027 | kochi     |
+|  103 | amith  | 2003 | 564023785625 | TVM       |
+|  104 | sura   | 2003 | 459027891325 | kozhikode |
+|  105 | jobin  | 2002 | 256789354730 | palakkad  |
+|  106 | alen   | 2004 | 345689670549 | calicut   |
+|  107 | arjun  | 2003 | 449953671192 | kochi     |
+|  108 | kannan | 2000 | 234567890567 | TVM       |
++------+--------+------+--------------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> savepoint sp1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> update employee set city='calicut' where SSN=104;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> savepoint sp2;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> rollback to sp1;
+Query OK, 0 rows affected (0.00 sec)
+mysql> select*from employee;
++------+--------+------+--------------+-----------+
+| SSN  | name   | dob  | adhar        | city      |
++------+--------+------+--------------+-----------+
+|  101 | abin   | 2004 | 123456784526 | calicut   |
+|  102 | salman | 2000 | 123456728027 | kochi     |
+|  103 | amith  | 2003 | 564023785625 | TVM       |
+|  104 | sura   | 2003 | 459027891325 | kozhikode |
+|  105 | jobin  | 2002 | 256789354730 | palakkad  |
+|  106 | alen   | 2004 | 345689670549 | calicut   |
+|  107 | arjun  | 2003 | 449953671192 | kochi     |
+|  108 | kannan | 2000 | 234567890567 | TVM       |
++------+--------+------+--------------+-----------+
+8 rows in set (0.00 sec)
+
+ b) DCL COMMAND 
+ Create two users user1, user2 
+ 1. GRANT:   Give insert and select privilege to user 1 on customer table in the invoice 
+ mysql> CREATE USER 'nihadc'@'localhost' IDENTIFIED BY 'Nihad1@2004';
+Query OK, 0 rows affected (0.10 sec)
+ mysql> CREATE USER 'nihad2'@'localhost' IDENTIFIED BY 'Nihad2@2004';
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> GRANT SELECT ON INVOICE.customer TO 'nihadc'@'localhost';
+Query OK, 0 rows affected (0.09 sec)
+mysql> GRANT SELECT ON INVOICE.customer TO 'nihad2'@'localhost';
+Query OK, 0 rows affected (0.20 sec)
+
+
+mysql> show grants for 'nihadc'@'localhost';
++--------------------------------------------------------------+
+| Grants for nihadc@localhost                                  |
++--------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `nihadc`@`localhost`                   |
+| GRANT SELECT ON `INVOICE`.`customer` TO `nihadc`@`localhost` |
++--------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+mysql> GRANT UPDATE, DELETE ON INVOICE.* TO 'nihadc'@'localhost';
+Query OK, 0 rows affected (0.10 sec)
+
+<pre>mysql&gt; show grants for &apos;nihadc&apos;@&apos;localhost&apos;;
++--------------------------------------------------------------+
+| Grants for nihadc@localhost                                  |
++--------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `nihadc`@`localhost`                   |
+| GRANT UPDATE, DELETE ON `INVOICE`.* TO `nihadc`@`localhost`  |
+| GRANT SELECT ON `INVOICE`.`customer` TO `nihadc`@`localhost` |
++--------------------------------------------------------------+
+3 rows in set (0.00 sec)
+
+mysql> show grants for 'nihad2'@'localhost';
++--------------------------------------------------------------+
+| Grants for nihad2@localhost                                  |
++--------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `nihad2`@`localhost`                   |
+| GRANT UPDATE, DELETE ON `INVOICE`.* TO `nihad2`@`localhost`  |
+| GRANT SELECT ON `INVOICE`.`customer` TO `nihad2`@`localhost` |
++--------------------------------------------------------------+
+
+
+ 2. REVOKE:   Remove delete privilege of user 2.
+ 
+ mysql> REVOKE DELETE ON INVOICE.*FROM 'nihad2'@'localhost''
+    -> ;
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> show grants for 'nihad2'@'localhost';
++--------------------------------------------------------------+
+| Grants for nihad2@localhost                                  |
++--------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `nihad2`@`localhost`                   |
+| GRANT UPDATE ON `INVOICE`.* TO `nihad2`@`localhost`          |
+| GRANT SELECT ON `INVOICE`.`customer` TO `nihad2`@`localhost` |
++--------------------------------------------------------------+
+3 rows in set (0.00 sec)
+
+ 
