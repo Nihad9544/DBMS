@@ -1,0 +1,37 @@
+1.Create a view for customers who have purchased products. 
+
+mysql>  CREATE VIEW purchased2 AS SELECT customer.id, customer.name, invoice_master.inv_id, invoice_master.inv_date FROM customer JOIN invoice_master ON customer.id = invoice_master.customer_id;
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> select * from purchased2;
++----+--------+--------+------------+
+| id | name   | inv_id | inv_date   |
++----+--------+--------+------------+
+|  2 | nihad  |   1002 | 2025-01-04 |
+|  2 | nihad  |   1003 | 2025-03-05 |
+|  2 | nihad  |   1007 | 2025-05-23 |
+|  6 | anjith |   1009 | 2025-06-18 |
+|  7 | devika |   1011 | 2025-08-24 |
++----+--------+--------+------------+
+5 rows in set (0.00 sec)
+
+2. Create a view for invoice products[cname, , inv_id, product_id, quantity]
+
+
+mysql> CREATE VIEW products AS SELECT customer.name AS cname, invoice_master.inv_id,Invoice_item.inv_id AS product_id,Invoice_item.quantity FROM customer JOIN invoice_master ON customer.id = invoice_master.customer_id JOIN Invoice_item ON invoice_master.inv_id = Invoice_item.inv_id;
+Query OK, 0 rows affected (0.16 sec)
+
+mysql> select * from products;
++--------+--------+------------+----------+
+| cname  | inv_id | product_id | quantity |
++--------+--------+------------+----------+
+| nihad  |   1007 |       1007 |        3 |
+| devika |   1011 |       1011 |        2 |
+| anjith |   1009 |       1009 |        3 |
+| nihad  |   1003 |       1003 |        1 |
+| devika |   1011 |       1011 |        5 |
+| anjith |   1009 |       1009 |        3 |
+| devika |   1011 |       1011 |        5 |
++--------+--------+------------+----------+
+7 rows in set (0.00 sec)
+
